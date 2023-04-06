@@ -1,0 +1,9 @@
+export { AstroIcon } from './AstroIcon';
+export { PlaywrightIcon } from './PlaywrightIcon';
+export { PythonIcon } from './PythonIcon';
+export { ReactIcon } from './ReactIcon';
+export { RemixIcon } from './RemixIcon';
+export { SolidJSIcon } from './SolidIcon';
+export { TailwindIcon } from './TailwindIcon';
+export { TypeScriptIcon } from './TypeScriptIcon';
+export { ViteIcon } from './ViteIcon';
