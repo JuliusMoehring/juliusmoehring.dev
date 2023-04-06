@@ -9,11 +9,12 @@
         "format": "prettier --write .",
         "lint:fix": "npx eslint --fix \"src/**/*.{ts,tsx,astro}\"",
         "lint": "npx eslint \"src/**/*.{ts,tsx,astro}\"",
+        "precommit": "npm run lint:fix && npm run typecheck && npm run format",
         "preview": "astro preview",
         "start": "astro dev",
+        "typecheck": "tsc --noEmit",
         "update-dependencies:update": "ncu -u",
-        "update-dependencies": "ncu",
-        "typecheck": "tsc --noEmit"
+        "update-dependencies": "ncu"
     },
     "dependencies": {
         "@astrojs/prefetch": "^0.2.1",
