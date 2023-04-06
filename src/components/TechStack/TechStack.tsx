@@ -2,65 +2,66 @@ import type { Component } from 'solid-js';
 import { For } from 'solid-js';
 import { Headline } from '../UI/Headline';
 import { Paragraph } from '../UI/Paragraph';
+import { ReactIcon } from '../icons/TechStackIcons/React';
 import { TechStackEntry } from './TechStackEntry';
 
-const stack = [
+const stack: TechStackEntry[] = [
     {
         name: 'TypeScript',
         href: 'https://www.typescriptlang.org/',
-        icon: 'https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae',
+        iconLink: 'https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae',
     },
     {
         name: 'React JS',
         href: 'https://reactjs.org/',
-        icon: 'https://reactjs.org/logo-180x180.png',
+        iconComponent: ReactIcon,
     },
     {
         name: 'Solid JS',
         href: 'https://www.solidjs.com/',
-        icon: 'https://www.solidjs.com/img/favicons/apple-touch-icon.png',
+        iconLink: 'https://www.solidjs.com/img/favicons/apple-touch-icon.png',
     },
     {
         name: 'Tailwind CSS',
         href: 'https://tailwindcss.com/',
-        icon: 'https://tailwindcss.com/favicons/apple-touch-icon.png?v=3',
+        iconLink: 'https://tailwindcss.com/favicons/apple-touch-icon.png?v=3',
     },
     {
         name: 'Remix',
         href: 'https://remix.run/',
-        icon: 'https://remix.run/favicon-180.png',
+        iconLink: 'https://remix.run/favicon-180.png',
     },
     {
         name: 'Astro',
         href: 'https://astro.build/',
-        icon: 'https://astro.build/favicon.svg',
+        iconLink: 'https://astro.build/favicon.svg',
     },
     {
         name: 'Vite',
         href: 'https://vitejs.dev/',
-        icon: 'https://vitejs.dev/logo.svg',
+        iconLink: 'https://vitejs.dev/logo.svg',
     },
     {
         name: 'Playwright',
         href: 'https://playwright.dev',
-        icon: 'https://playwright.dev/img/playwright-logo.svg',
+        iconLink: 'https://playwright.dev/img/playwright-logo.svg',
     },
     {
         name: 'Vitest',
         href: 'https://vitest.dev/',
-        icon: 'https://vitest.dev/logo.svg',
+        iconLink: 'https://vitest.dev/logo.svg',
     },
     {
         name: 'Python',
         href: 'https://www.python.org/',
-        icon: 'https://www.python.org/static/favicon.ico',
+        iconLink: 'https://www.python.org/static/favicon.ico',
     },
 ];
 
 export const TechStack: Component = () => {
     return (
         <div class="flex flex-col gap-4">
-            <Headline level="h2">Techstack</Headline>
+            <Headline level="h2">Tech Stack</Headline>
 
             <Paragraph>
                 Since I have started my career in tech as a frontend developer, most of my current tech stack is

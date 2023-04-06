@@ -2,11 +2,11 @@ import type { Component, JSX } from 'solid-js';
 import { For } from 'solid-js';
 import { SetupEntry } from './SetupEntry';
 
-interface SetupCardProps {
+type SetupCardProps = {
     title: string;
     icon: Component<JSX.SvgSVGAttributes<SVGSVGElement>>;
     entries: SetupEntry[];
-}
+};
 
 export const SetupCard: Component<SetupCardProps> = ({ title, icon: Icon, entries }) => {
     return (

@@ -1,10 +1,10 @@
 import type { Component } from 'solid-js';
 
-export interface SetupEntry {
+export type SetupEntry = {
     name: string;
     description: string;
     logo: string;
-}
+};
 
 export const SetupEntry: Component<SetupEntry> = ({ name, description, logo }) => {
     return (

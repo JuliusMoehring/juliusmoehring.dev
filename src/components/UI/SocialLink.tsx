@@ -1,9 +1,9 @@
 import type { Component, JSX } from 'solid-js';
 import type { SocialIconProps } from '../icons/SocialIcons';
 
-interface SocialLinkProps extends JSX.HTMLAttributes<HTMLAnchorElement> {
+export type SocialLinkProps = JSX.IntrinsicElements['a'] & {
     icon: Component<SocialIconProps>;
-}
+};
 
 export const SocialLink: Component<SocialLinkProps> = ({ icon: Icon, ...attributes }) => {
     return (

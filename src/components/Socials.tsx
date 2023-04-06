@@ -1,9 +1,10 @@
 import type { Component } from 'solid-js';
 import { For } from 'solid-js';
-import { DataCampIcon, GitHubIcon, LinkedInIcon, TwitterIcon } from './icons/SocialIcons';
+import type { SocialLinkProps } from './UI/SocialLink';
 import { SocialLink } from './UI/SocialLink';
+import { DataCampIcon, GitHubIcon, LinkedInIcon, TwitterIcon } from './icons/SocialIcons';
 
-const socials = [
+const socials: SocialLinkProps[] = [
     {
         href: 'https://twitter.com/julius_mohring',
         'aria-label': 'Follow on Twitter',

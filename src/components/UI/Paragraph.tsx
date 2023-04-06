@@ -1,7 +1,7 @@
 import clx from 'classnames';
 import type { JSX, ParentComponent } from 'solid-js';
 
-export const Paragraph: ParentComponent<JSX.HTMLAttributes<HTMLParagraphElement>> = ({ children, ...attributes }) => {
+export const Paragraph: ParentComponent<JSX.IntrinsicElements['p']> = ({ children, ...attributes }) => {
     attributes.class;
 
     return (

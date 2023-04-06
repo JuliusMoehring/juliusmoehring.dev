@@ -1,12 +1,12 @@
 import type { Component } from 'solid-js';
 
-export interface ResumeEntry {
+export type ResumeEntry = {
     company: string;
     role: string;
     logo: string;
     start: Date;
     end: Date;
-}
+};
 
 const formatDate = (date: Date) => {
     const now = new Date();
