@@ -10,7 +10,6 @@ const { PUBLIC_BASE_URL } = loadEnv(import.meta.env.MODE, process.cwd(), '');
 
 export default defineConfig({
     site: PUBLIC_BASE_URL,
-    base: '/juliusmoehring.dev',
     integrations: [
         tailwind(),
         solid(),
