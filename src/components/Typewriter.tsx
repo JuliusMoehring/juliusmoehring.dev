@@ -70,14 +70,6 @@ export const Typewriter: Component = () => {
 
     onCleanup(() => clearInterval(timer));
 
-    // Write the first word
-
-    // Pause for a second
-
-    // Delete the word
-
-    // Loop
-
     return (
         <div class="flex text-white h-20">
             <Headline>
