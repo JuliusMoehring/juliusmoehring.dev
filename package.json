@@ -1,15 +1,41 @@
 {
-	"name": "kjm.dev",
-	"type": "module",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
-	},
-	"dependencies": {
-		"astro": "^2.0.14"
-	}
+    "name": "juliusmoehring.dev",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "astro": "astro",
+        "build": "astro build",
+        "dev": "astro dev",
+        "format": "prettier --write .",
+        "lint:fix": "npx eslint --fix \"src/**/*.{ts,tsx,astro}\"",
+        "lint": "npx eslint \"src/**/*.{ts,tsx,astro}\"",
+        "precommit": "npm run lint:fix && npm run typecheck && npm run format",
+        "preview": "astro preview",
+        "start": "astro dev",
+        "typecheck": "tsc --noEmit",
+        "update-dependencies:update": "ncu -u",
+        "update-dependencies": "ncu"
+    },
+    "dependencies": {
+        "@astrojs/prefetch": "^0.2.1",
+        "@astrojs/sitemap": "^1.2.2",
+        "@astrojs/solid-js": "^2.1.0",
+        "@astrojs/tailwind": "^3.1.1",
+        "@tailwindcss/aspect-ratio": "^0.4.2",
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@tailwindcss/typography": "^0.5.9",
+        "astro": "^2.2.0",
+        "classnames": "^2.3.2",
+        "tailwindcss": "^3.3.1"
+    },
+    "devDependencies": {
+        "@types/classnames": "^2.3.1",
+        "@typescript-eslint/eslint-plugin": "^5.57.1",
+        "@typescript-eslint/parser": "^5.57.1",
+        "astro-eslint-parser": "^0.13.2",
+        "eslint": "^8.37.0",
+        "npm-check-updates": "^16.10.7",
+        "prettier": "^2.8.7",
+        "typescript": "^5.0.3"
+    }
 }
