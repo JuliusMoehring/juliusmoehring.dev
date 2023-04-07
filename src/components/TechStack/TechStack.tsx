@@ -61,7 +61,7 @@ const stack: TechStackEntry[] = [
 export const TechStack: Component = () => {
     return (
         <div class="flex flex-col gap-4">
-            <Headline level="h2">Tech Stack</Headline>
+            <Headline level="h2">Technology I am working with</Headline>
 
             <Paragraph>
                 Since I have started my career in tech as a frontend developer, most of my current tech stack is
