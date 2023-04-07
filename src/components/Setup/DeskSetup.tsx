@@ -8,9 +8,9 @@ const daysWithMacbook = Math.floor((Date.now() - new Date('2019-10-01').getTime(
 const setup: SetupEntry[] = [
     {
         name: 'Macbook Pro 16"',
-        description: `Because I am a big Apple fanboy, I use a Macbook Pro 16" as my main development machine. Even though my MacBook is a 2019 model, which didn\'t get the love it deserved during development because at the time the best Apple engineers were working on the M1, it is a great maschine. So far, I was only able to cook some eggs 🍳 in it ${
+        description: `Because I am a big Apple fanboy, I use a Macbook Pro 16" as my main development machine. Even though my MacBook is a 2019 model, which didn\'t get the love it deserved during development because at the time the best Apple engineers were working on the M1, it is a great maschine. So far, I was only able to cook ${
             daysWithMacbook * 2
-        } times 🔥`,
+        } (around 2/day) eggs on it. 🔥`,
         logo: 'https://developer.apple.com/favicon.ico',
     },
     {
