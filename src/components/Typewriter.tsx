@@ -2,7 +2,7 @@ import type { Component } from 'solid-js';
 import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Headline } from './UI/Headline';
 
-const words = ['Software engineer', 'Data Science Student', 'Rider'];
+const words = ['Software engineer', 'Data Science Student', 'Professional Rider'];
 
 export const Typewriter: Component = () => {
     const [text, setText] = createSignal('');
