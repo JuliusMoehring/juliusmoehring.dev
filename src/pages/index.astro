@@ -7,6 +7,7 @@ import { Socials } from '../components/Socials';
 import { TechStack } from '../components/TechStack/TechStack';
 import { Typewriter } from '../components/Typewriter';
 import { Avatar } from '../components/UI/Avatar';
+import { Headline } from '../components/UI/Headline';
 import { Paragraph } from '../components/UI/Paragraph';
 import Layout from '../layouts/Layout.astro';
 ---
@@ -24,9 +25,9 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <Paragraph>
-                I'm Julius, a software engineer based in the west of Germany. I used to be working mostly as a frontend
-                engineer, but currently I'm shifting my focus to become a data scientist. Before I got into software
-                engineering, I trained young jumpers and brought them into the sport.
+                I'm Julius, a software engineer based in the west of Germany 🇩🇪. I used to be working mostly as a
+                frontend engineer, but currently I'm shifting my focus to become a data scientist. Before I got into
+                software engineering, I trained young jumpers and brought them into the sport 🐴.
             </Paragraph>
         </div>
 
@@ -39,7 +40,14 @@ import Layout from '../layouts/Layout.astro';
         <div class="col-span-12 lg:col-span-4"><Resume /></div>
     </div>
 
-    <div class="grid mt-12 grid-cols-12 gap-2">
+    <div class="grid mt-12 grid-cols-12 gap-4">
+        <Headline class="col-span-12">Stuff I use 🔨 and tools I love ❤️</Headline>
+
+        <Paragraph class="col-span-12">
+            As a software engineer, I'm always looking for new tools and technologies to improve my workflow. Here are
+            some of the tools I use on a daily basis.
+        </Paragraph>
+
         <div class="col-span-12 lg:col-span-4">
             <DevelopmentTools />
         </div>
