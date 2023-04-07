@@ -5,7 +5,7 @@ export const Paragraph: ParentComponent<JSX.IntrinsicElements['p']> = ({ childre
     attributes.class;
 
     return (
-        <p {...attributes} class={clx(attributes.class, 'text-base text-zinc-400 max-w-prose')}>
+        <p {...attributes} class={clx(attributes.class, 'text-base text-zinc-200 max-w-prose')}>
             {children}
         </p>
     );

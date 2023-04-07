@@ -6,14 +6,22 @@ import { ProductivityTools } from '../components/Setup/ProductivityTools';
 import { Socials } from '../components/Socials';
 import { TechStack } from '../components/TechStack/TechStack';
 import { Typewriter } from '../components/Typewriter';
+import { Avatar } from '../components/UI/Avatar';
 import { Paragraph } from '../components/UI/Paragraph';
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Julius Möhring - software engineer, data science student and professional rider">
-    <div class="flex flex-col gap-10 p-4 w-full">
+<Layout
+    title="Julius Möhring | Software Engineer & Professional Rider"
+    description="Hi, I am Julius. I used to be a professional rider focused on training young horses. Since 5 years I am into developing software."
+>
+    <div class="flex flex-col gap-10 w-full">
         <div class="flex flex-col gap-4">
-            <Typewriter client:load />
+            <div class="flex gap-7 sm:justify-start sm:items-center flex-col sm:flex-row">
+                <Avatar />
+
+                <Typewriter client:load />
+            </div>
 
             <Paragraph>
                 I'm Julius, a software engineer based in the west of Germany. I used to be working mostly as a frontend
@@ -25,15 +33,23 @@ import Layout from '../layouts/Layout.astro';
         <Socials />
     </div>
 
-    <div class="flex flex-wrap gap-2 w-full">
-        <TechStack />
+    <div class="grid grid-cols-12 w-full gap-2 mt-12">
+        <div class="col-span-12 lg:col-span-8"><TechStack /></div>
 
-        <Resume />
+        <div class="col-span-12 lg:col-span-4"><Resume /></div>
+    </div>
 
-        <DevelopmentTools />
+    <div class="grid mt-12 grid-cols-12 gap-2">
+        <div class="col-span-12 lg:col-span-4">
+            <DevelopmentTools />
+        </div>
 
-        <ProductivityTools />
+        <div class="col-span-12 lg:col-span-4">
+            <ProductivityTools />
+        </div>
 
-        <DeskSetup />
+        <div class="col-span-12 lg:col-span-4">
+            <DeskSetup />
+        </div>
     </div>
 </Layout>

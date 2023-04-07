@@ -40,7 +40,6 @@ export const Typewriter: Component = () => {
     const timer = setInterval(() => {
         const word = words[cursor().wordIndex];
 
-        // If we could not find a word, reset the cursor and text
         if (!word) {
             setCursor({ wordIndex: 0, letterIndex: 0 });
             setText('');
@@ -50,13 +49,11 @@ export const Typewriter: Component = () => {
 
         const letter = word[cursor().letterIndex];
 
-        // If we could not find a letter, increment the skipped loops
         if (!letter && skippedLoops() <= 30) {
             setSkippedLoops(prev => prev + 1);
             return;
         }
 
-        // If we could not find a letter and we have enough loops skipped, move to the next word
         if (!letter) {
             setSkippedLoops(0);
             setCursor(prev => ({ wordIndex: prev.wordIndex + 1, letterIndex: 0 }));
@@ -71,12 +68,9 @@ export const Typewriter: Component = () => {
     onCleanup(() => clearInterval(timer));
 
     return (
-        <div class="flex text-white h-20">
+        <div class="flex text-white h-80 items-center">
             <Headline>
-                I am a{' '}
-                <span ref={headlineRef!} class="flex items-baseline">
-                    {text()}
-                </span>
+                Hi, I am Julius! <br />I am a <span ref={headlineRef!}>{text()}</span>
                 <span class="sr-only">{words.join(', ')}</span>
             </Headline>
         </div>

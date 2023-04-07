@@ -1,8 +1,8 @@
 import type { Component } from 'solid-js';
 import { onMount } from 'solid-js';
-import { ArrowRightIcon } from '../icons/ArrowRightIcon';
 import { Headline } from '../UI/Headline';
 import { Paragraph } from '../UI/Paragraph';
+import { ArrowRightIcon } from '../icons/ArrowRightIcon';
 
 interface BlogCardProps {
     title: string;
