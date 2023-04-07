@@ -7,25 +7,25 @@ const productivityTools: SetupEntry[] = [
     {
         name: 'Notion',
         description:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            'Notion provides a flexible and customizable workspace that can be tailored to the specific needs of individual developers or teams. With features like databases, boards, and timelines, Notion makes it easy to organize and collaborate on projects, track bugs and issues, and document processes and best practices.',
         logo: 'https://www.notion.so/images/favicon.ico',
     },
     {
         name: 'Raycast',
         description:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            'Raycast is the successor of Alfred. It is a powerful productivity tool that allows you to control your computer with a few keystrokes. It is super fast and has a great extension ecosystem.',
         logo: 'https://www.raycast.com/favicon-production.png',
     },
     {
         name: '1Password',
         description:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            '1Password is a password manager that allows you to store all your passwords in one place. It is super secure and has a great browser extension. It also has a great mobile app.',
         logo: 'https://developer.1password.com/img/favicon.ico',
     },
     {
         name: 'Spectacle',
         description:
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            'Spectacle is a window manager for macOS. It allows you to control the position and size of your windows with a few keystrokes. Spectacle comes in handy when you are working with multiple window and a big screen.',
         logo: 'https://www.spectacleapp.com/images/favicon.ico',
     },
 ];
