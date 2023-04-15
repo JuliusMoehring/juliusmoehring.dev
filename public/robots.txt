@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://juliusmoehring.dev/sitemap.xml
+Sitemap: https://juliusmoehring.dev/sitemap-index.xml
