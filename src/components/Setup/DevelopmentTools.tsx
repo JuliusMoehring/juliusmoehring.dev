@@ -5,10 +5,10 @@ import type { SetupEntry } from './SetupEntry';
 
 const developmentTools: SetupEntry[] = [
     {
-        name: 'Visual Studio Code',
+        name: 'Zed',
         description:
-            'I used to work with JetBrains products only, but since a few years I am using Visual Studio Code as my main editor. It is fast, lightweight and has a great extension ecosystem.',
-        logo: 'https://code.visualstudio.com/favicon.ico',
+            "Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. It's also open source.",
+        logo: 'https://zed.dev/favicon_white_64.png',
     },
     {
         name: 'Warp',
@@ -21,12 +21,6 @@ const developmentTools: SetupEntry[] = [
         description:
             'After working with Chrome for a few years, I first switched to Brave and now to Arc. It is a privacy focused browser based on Chromium. It offers nice features like spaces and split view that make my workflow more efficient. Like Brave it has a build in AdBlocker and because its build ontop of Chromium, you can use all the extensions you are used to.',
         logo: 'https://arc.net/favicon.png',
-    },
-    {
-        name: 'TablePlus',
-        description:
-            'TablePlus is in my opinion the most appealing GUI tool for relational databases. It has a super modern look and feel and supports all the major databases. One thing I like in particular is beeing able to export and share database connections with your teammates.',
-        logo: 'https://tableplus.com/resources/favicons/apple-icon-76x76.png',
     },
 ];
 

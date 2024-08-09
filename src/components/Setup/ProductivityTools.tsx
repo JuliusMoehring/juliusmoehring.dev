@@ -22,12 +22,6 @@ const productivityTools: SetupEntry[] = [
             '1Password is a password manager that allows you to store all your passwords in one place. It is super secure and has a great browser extension. It also has a great mobile app.',
         logo: 'https://developer.1password.com/img/favicon.ico',
     },
-    {
-        name: 'Spectacle',
-        description:
-            'Spectacle is a window manager for macOS. It allows you to control the position and size of your windows with a few keystrokes. Spectacle comes in handy when you are working with multiple window and a big screen.',
-        logo: 'https://www.spectacleapp.com/images/favicon.ico',
-    },
 ];
 
 export const ProductivityTools: Component = () => {

@@ -5,11 +5,18 @@ import { ResumeEntry } from './ResumeEntry';
 
 const resumeEntries: ResumeEntry[] = [
     {
+        company: 'EDGITAL GmbH',
+        role: 'Working Student',
+        logo: 'https://images.squarespace-cdn.com/content/v1/63986b4b1ea7ce6ed9455ede/f4e3cbdd-6a94-44f4-baa8-449a600018c8/favicon.ico?format=100w',
+        start: new Date('2023-08-01'),
+        end: new Date('2023-12-31'),
+    },
+    {
         company: 'HOCHTIEF PPP SOLUTIONS GmbH',
         role: 'Working Student',
-        logo: 'https://www.hochtief.de/typo3conf/ext/sitepackage/Resources/Public/Icons/favicon.ico',
+        logo: 'https://www.hochtief.de/_assets/1710094660852ef5f22e6cbd04149805/Icons/favicon.ico',
         start: new Date('2022-11-01'),
-        end: new Date(),
+        end: new Date('2023-07-31'),
     },
     {
         company: 'welearn GmbH',

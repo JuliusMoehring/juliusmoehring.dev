@@ -19,7 +19,7 @@ export const TechStackEntry: Component<TechStackEntry> = ({ name, href, iconLink
         <a
             href={href}
             aria-label={name}
-            class="hover:grayscale grayscale-0 hover:scale-95 h-16 w-16 rounded-2xl border border-zinc-700/40 flex justify-center items-center"
+            class="grayscale hover:grayscale-0 hover:scale-105 h-16 w-16 rounded-2xl border border-zinc-700/40 flex justify-center items-center"
             target="_blank"
         >
             {iconLink && <img src={iconLink} alt={name} class="w-10 h-10 rounded" draggable={false} />}

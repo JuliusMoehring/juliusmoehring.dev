@@ -56,6 +56,11 @@ const stack: TechStackEntry[] = [
         href: 'https://www.python.org/',
         iconLink: 'https://www.python.org/static/favicon.ico',
     },
+    {
+        name: 'Go',
+        href: 'https://go.dev/',
+        iconLink: 'https://go.dev/images/favicon-gopher.svg',
+    },
 ];
 
 export const TechStack: Component = () => {

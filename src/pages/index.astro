@@ -1,4 +1,5 @@
 ---
+import { Education } from '../components/Education/Education';
 import { Resume } from '../components/Resume/Resume';
 import { DeskSetup } from '../components/Setup/DeskSetup';
 import { DevelopmentTools } from '../components/Setup/DevelopmentTools';
@@ -6,10 +7,10 @@ import { ProductivityTools } from '../components/Setup/ProductivityTools';
 import { Socials } from '../components/Socials';
 import { TechStack } from '../components/TechStack/TechStack';
 import { Typewriter } from '../components/Typewriter';
-import { Avatar } from '../components/UI/Avatar';
 import { Headline } from '../components/UI/Headline';
 import { Paragraph } from '../components/UI/Paragraph';
 import Layout from '../layouts/Layout.astro';
+import Avatar from "../components/UI/Avatar.astro"
 ---
 
 <Layout
@@ -34,30 +35,33 @@ import Layout from '../layouts/Layout.astro';
         <Socials />
     </div>
 
-    <div class="grid grid-cols-12 w-full gap-2 mt-12">
-        <div class="col-span-12 lg:col-span-8"><TechStack /></div>
+    <div class="grid grid-cols-3 w-full gap-2 mt-12">
+        <div class="col-span-3 md:col-span-2 flex flex-col gap-2">
+            <TechStack />
 
-        <div class="col-span-12 lg:col-span-4"><Resume /></div>
-    </div>
+            <Headline class="mt-12">Stuff I use 🔨 and tools I love ❤️</Headline>
+            <Paragraph>
+                As a software engineer, I'm always looking for new tools and technologies to improve my workflow. Here
+                are some of the tools I use on a daily basis.
+            </Paragraph>
 
-    <div class="grid mt-12 grid-cols-12 gap-4">
-        <Headline class="col-span-12">Stuff I use 🔨 and tools I love ❤️</Headline>
+            <div>
+                <DevelopmentTools />
+            </div>
 
-        <Paragraph class="col-span-12">
-            As a software engineer, I'm always looking for new tools and technologies to improve my workflow. Here are
-            some of the tools I use on a daily basis.
-        </Paragraph>
+            <div>
+                <ProductivityTools />
+            </div>
 
-        <div class="col-span-12 lg:col-span-4">
-            <DevelopmentTools />
+            <div>
+                <DeskSetup client:load />
+            </div>
         </div>
 
-        <div class="col-span-12 lg:col-span-4">
-            <ProductivityTools />
-        </div>
+        <div class="col-span-3 md:col-span-1 flex flex-col w-full gap-2 mt-12">
+            <Resume />
 
-        <div class="col-span-12 lg:col-span-4">
-            <DeskSetup />
+            <Education />
         </div>
     </div>
 </Layout>

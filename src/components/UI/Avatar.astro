@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import avatar from "../../assets/images/avatar.jpg"
+---
+
+<div
+    class="flex items-end justify-center border border-gray-600 rounded-full overflow-hidden w-32 h-32 transition-all scale-95"
+    style={{ 'box-shadow': '0 0 10px #14b8a6' }}
+>
+    <Image src={avatar} alt="Julius Möhring" class="self-baseline" />
+</div>
