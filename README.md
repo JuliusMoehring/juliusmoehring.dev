@@ -85,8 +85,7 @@ See GitHub's [workflow trigger rules](https://docs.github.com/en/actions/how-tos
 2. Copy the token into the GitHub Actions secret `CLOUDFLARE_API_TOKEN`.
    Copy the target account ID into the GitHub Actions secret `CLOUDFLARE_ACCOUNT_ID`.
 3. Ensure `juliusmoehring.dev` is an active zone in the same Cloudflare account.
-4. After the first deployment, open **Workers & Pages → juliusmoehring-dev → Settings → Domains & Routes → Add → Custom Domain**.
-   Add `juliusmoehring.dev`.
+4. Deploy the site. The custom domain `juliusmoehring.dev` is declared in `wrangler.jsonc`, so Wrangler configures it automatically during deployment.
    Cloudflare creates the DNS record and provisions the TLS certificate.
    An existing CNAME on that hostname must be resolved before adding the custom domain.
 
@@ -107,7 +106,7 @@ After completing the GitHub and Cloudflare setup:
 2. Open a pull request with a release-producing title, such as `feat: add portfolio content` or `fix: repair navigation links`.
    Squash merge it after the required checks pass.
 3. The **Deploy to Cloudflare** workflow validates and deploys the merged site.
-   Add the custom domain after this first deployment.
+   Wrangler configures the custom domain during this deployment.
 4. Wait for Release Please to open its release pull request for `0.0.1`.
    Approve its workflow runs if requested, then review and squash merge it after the checks pass.
    Keep its generated title and description.
