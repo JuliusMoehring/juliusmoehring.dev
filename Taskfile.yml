@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmd: task --list
+
+  format:
+    desc: Format the codebase
+    cmd: nub exec biome check . --write {{.CLI_ARGS}}
+
+  lint:
+    desc: Lint the codebase
+    cmd: nub exec biome check . {{.CLI_ARGS}}
+
+  dev:
+    desc: Start development tasks
+    cmd: nub exec astro dev
+
+  build:
+    desc: Build the project
+    cmd: nub exec astro build
+
+  preview:
+    desc: Preview the built project
+    cmd: nub exec astro preview
+
+  deploy:
+    desc: Deploy the built static site to Cloudflare
+    cmd: nub exec wrangler deploy {{.CLI_ARGS}}
+
+  deploy:check:
+    desc: Validate the built Cloudflare deployment without publishing
+    cmd: nub exec wrangler deploy --dry-run {{.CLI_ARGS}}
+
+  test:
+    desc: Build and smoke-test the static site
+    cmds:
+      - task: build
+      - task: test:run
+
+  test:run:
+    desc: Run Vitest against the existing build
+    cmd: nub exec vitest run {{.CLI_ARGS}}
+
+  typecheck:
+    desc: Check TypeScript and Astro types
+    cmds:
+      - nub exec astro sync
+      - nub exec tsc --noEmit --runExternalCode

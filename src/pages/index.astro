@@ -1,0 +1,16 @@
+---
+import Footer from "../components/footer.astro";
+import Header from "../components/header.astro";
+import Hero from "../components/hero.astro";
+import PageLayout from "../layouts/page.layout.astro";
+---
+
+<PageLayout>
+	<Header />
+
+	<main class="grid place-content-center py-9 [@media(max-height:36rem)]:py-4">
+		<Hero />
+	</main>
+
+	<Footer />
+</PageLayout>

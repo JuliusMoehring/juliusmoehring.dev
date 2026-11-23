@@ -1,0 +1,36 @@
+name: 📝 PR Title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  pr-title:
+    name: PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📦 Unpack the trusted base
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+
+      - name: ⚡ Power up Node & Nub
+        uses: nubjs/setup-nub@v0
+        with:
+          nub-version: 0.11.1
+          node-version-file: .node-version
+
+      - name: 🧩 Gather dependencies
+        run: nub ci
+
+      - name: 📝 Validate conventional PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$PR_TITLE" | nub exec commitlint

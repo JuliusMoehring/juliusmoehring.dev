@@ -1,0 +1,69 @@
+name: 🧪 Quality Checks
+
+on:
+  pull_request:
+  merge_group:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📦 Unpack the source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: ⚡ Power up Node & Nub
+        uses: nubjs/setup-nub@v0
+        with:
+          nub-version: 0.11.1
+          node-version-file: .node-version
+
+      - name: 🛠️ Equip the task runner
+        uses: arduino/setup-task@v3
+        with:
+          version: "3.54.0"
+
+      - name: 🧩 Gather dependencies
+        run: nub ci
+
+      - name: ✨ Polish the code
+        run: task lint
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📦 Unpack the source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: ⚡ Power up Node & Nub
+        uses: nubjs/setup-nub@v0
+        with:
+          nub-version: 0.11.1
+          node-version-file: .node-version
+
+      - name: 🛠️ Equip the task runner
+        uses: arduino/setup-task@v3
+        with:
+          version: "3.54.0"
+
+      - name: 🧩 Gather dependencies
+        run: nub ci
+
+      - name: 🔍 Check the types
+        run: task typecheck
+
+      - name: 🧪 Put the site to the test
+        run: task test
+      - name: 🛰️ Rehearse the launch
+        run: task deploy:check
