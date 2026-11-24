@@ -1,0 +1,70 @@
+name: 📋 Prepare release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  prepare:
+    name: Open release PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HUSKY: "0"
+    steps:
+      - name: 📦 Unpack develop and release history
+        uses: actions/checkout@v6
+        with:
+          ref: develop
+          fetch-depth: 0
+          # This job pushes only its newly created release branch.
+          persist-credentials: true
+
+      - name: 🔍 Check release prerequisites
+        run: |
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Merge main back into develop before preparing a release.' >&2
+            exit 1
+          }
+          test "$(gh pr list --base main --state open --json headRefName --jq '[.[] | select(.headRefName | startswith("release/"))] | length')" = 0 || {
+            echo 'Finish or close the existing release PR first.' >&2
+            exit 1
+          }
+          if git diff --quiet origin/main HEAD; then
+            echo 'There are no new changes on develop to release.' >&2
+            exit 1
+          fi
+
+      - name: ⚡ Power up Node & Nub
+        uses: nubjs/setup-nub@v0
+        with:
+          nub-version: 0.11.1
+          node-version-file: .node-version
+
+      - name: 🧩 Gather dependencies
+        run: nub ci
+
+      - name: 🔖 Calculate version and update changelog
+        run: nub exec release-it --ci
+
+      - name: 📋 Open versioned release PR
+        run: |
+          version=$(node -p 'JSON.parse(require("node:fs").readFileSync("package.json", "utf8")).version')
+          git switch -c "release/$version"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add package.json CHANGELOG.md
+          git commit -m "chore(release): v$version"
+          git push --set-upstream origin "release/$version"
+          gh pr create --base main --head "release/$version" \
+            --title "chore(release): v$version" \
+            --body-file .github/release-pr.md

@@ -1,24 +1,29 @@
 name: 🚀 Deploy to Cloudflare
 
 on:
-  push:
-    branches: [main]
+  workflow_call:
+    inputs:
+      ref:
+        description: Released commit SHA to validate and deploy
+        required: true
+        type: string
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        required: true
+      CLOUDFLARE_ACCOUNT_ID:
+        required: true
 
 concurrency:
   group: cloudflare-production
   cancel-in-progress: false
+  queue: max
 
 permissions:
   contents: read
 
 jobs:
-  checks:
-    name: Validate deployment
-    uses: ./.github/workflows/checks.yml
-
   deploy:
     name: Deploy site
-    needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -26,6 +31,7 @@ jobs:
       - name: 📦 Unpack the source
         uses: actions/checkout@v6
         with:
+          ref: ${{ inputs.ref }}
           persist-credentials: false
 
       - name: ⚡ Power up Node & Nub

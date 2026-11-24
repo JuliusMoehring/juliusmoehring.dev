@@ -11,7 +11,7 @@ nub ci
 task dev
 ```
 
-Before you submit a pull request, run these checks:
+Before opening a pull request, run:
 
 ```sh
 task lint
@@ -20,112 +20,119 @@ task test
 task deploy:check
 ```
 
-`task test` builds the site before it runs the tests.
-`task deploy:check` checks the deployment files without a deployment.
+`task test` builds the site and runs the tests. `task deploy:check` validates
+packaging without publishing.
 
-## Releases
+## Branches and releases
 
-Use Conventional Commits for pull request titles.
-Use squash merge into `main`.
-Keep the title that passed the **PR title** check.
+```text
+feature/* → develop → release/<version> → main → v<version> → deployment
+                ↑                          │
+                └──── merge back via PR ────┘
+```
 
-- `fix: repair navigation links` increases the patch version.
-- `feat: add a projects page` increases the minor version.
-- `feat!: change public URLs` increases the major version at `1.0.0` and above.
-  Below `1.0.0`, a breaking change increases the minor version.
-- `docs: explain setup` and `chore: update tools` do not cause a release unless they specify a breaking change.
+- **Feature branches** start from `develop`. Open PRs into `develop` and squash
+  merge them using Conventional Commit titles, such as `feat: add a projects page`.
+- **Develop** holds the next release. Feature merges do not tag or deploy anything.
+- **Release branches** freeze a snapshot of `develop` for review and stabilization.
+  New features can continue on `develop` while a release is reviewed.
+- **Main** holds released code. Only `release/<version>` PRs may merge into it.
+  Merge release PRs with **Create a merge commit** to preserve feature history.
+  Every successful release merge is tagged and deployed.
 
-Release Please creates or updates a release pull request after a release change reaches `main`.
-Check the version, changelog, and file changes.
-On the bot-created PR, select **Approve workflows to run** if GitHub requests approval.
-Wait for the required checks and reviews.
-Then squash merge the release pull request with its generated title.
-Keep its generated description.
-Release Please creates the `vX.Y.Z` tag and GitHub Release with release notes.
-The project does not publish to npm.
+To prepare a release, open **Actions → Prepare release → Run workflow**.
+The workflow checks out `develop`, checks that the previous release has been
+merged back, and uses [release-it](https://github.com/release-it/release-it) with
+its [Conventional Changelog plugin](https://github.com/release-it/conventional-changelog)
+to calculate the version and update `package.json` and `CHANGELOG.md`.
+It commits those files on `release/<version>` and opens a PR into `main`.
+It never pushes directly to `develop` or `main`.
 
-Release Please controls `package.json`, `.release-please-manifest.json`, and `CHANGELOG.md`.
-Do not change versions or add changelog entries manually.
-`nub.lock` has no version field for the root package.
+Versioning is automatic: `feat:` increases the minor version, a breaking change
+increases the major version, and other Conventional Commit types increase the
+patch version. The largest change since the last tag determines the bump.
+`nub.lock` does not contain a root package version and needs no version update.
+There is no separate Release Please PR, and no npm package is published.
 
-The first release uses `0.0.1`.
-The empty manifest records no previous release.
-The first `fix:` or `feat:` change starts the release process.
+Review the release PR's version and changelog. Approve its workflow runs if GitHub
+shows **Approve workflows to run**, then wait for required checks before merging.
+Only one release PR can be open at a time. A release branch stays frozen; rerunning
+preparation does not add new features to an existing release. Make stabilization
+fixes on the release branch through PRs and update the changelog if necessary.
+
+After release, create a `sync/release-<version>` branch from the latest `develop`,
+merge `main` into that branch, and open a PR back into `develop`. Use a **merge commit**.
+The sync branch keeps the PR up to date even when new features have reached `develop`
+during release review, without changing `main`. It carries the version, changelog,
+release tag ancestry, and stabilization fixes back into development. Do this before
+preparing the next release.
 
 ## GitHub setup
 
-The GitHub repository is `JuliusMoehring/juliusmoehring.dev`.
-Before you enable releases, confirm that its default branch is `main`.
-Check for existing tags and releases.
-If release history exists, update the release configuration to agree with that history first.
-Do not replace existing tags or releases.
+The repository is `JuliusMoehring/juliusmoehring.dev`.
 
-1. Permit the workflow actions in **Settings → Actions → General**.
-   Under **Workflow permissions**, enable **Allow GitHub Actions to create and approve pull requests**.
-   The release workflow requests the write permissions it needs through the built-in `GITHUB_TOKEN`.
-2. Protect `main` with required pull requests.
-   Require branches to be up to date.
-   Require **Lint**, **Tests**, and **PR title**.
-   Block force pushes and branch deletion.
-   Do not permit protection bypasses.
-3. Enable squash merges with **Pull request title** as the default commit message.
-   Disable merge commits and rebase merges.
-4. In **Settings → Secrets and variables → Actions**, set the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` using the Cloudflare setup below.
+1. Create `develop` from the current `main` and make `develop` the default branch
+   so feature PRs target it by default. Preserve the existing commit history.
+2. Protect both `develop` and `main` with required PRs and up-to-date branches.
+   Require **Lint**, **Tests**, and **PR title**. Block direct pushes, force pushes,
+   branch deletion, and protection bypasses. Do not require linear history:
+   releases and synchronization need merge commits. Do not use a merge queue
+   to combine releases.
+3. Enable both squash merges and merge commits. In a ruleset targeting `main`,
+   require **Merge** as its allowed PR merge method. Allow merge commits and squash
+   merges into `develop`, since it receives both feature PRs and release synchronization.
+   Use **Pull request title** as the default squash message. Disable rebase merges.
+4. Under **Settings → Actions → General**, permit the workflow actions and enable
+   **Allow GitHub Actions to create and approve pull requests**.
+5. Set Actions repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
 
-No GitHub App, personal access token, or Release Please variable or secret is required.
-GitHub provides `GITHUB_TOKEN` automatically.
-If you previously configured `RELEASE_PLEASE_APP_ID` or `RELEASE_PLEASE_APP_PRIVATE_KEY`, they are no longer used.
-Bot-created release PR checks may require **Approve workflows to run** before they start.
+The **Tests** check rejects PRs into `main` unless the source is a repository
+branch named `release/<package.json version>`, the version is new, and it increases
+from `main`. The first release may use the existing untagged package version.
+Use squash merges into `develop` for features; use merge commits for releases
+into `main` and for synchronization back into `develop`.
+
+GitHub provides `GITHUB_TOKEN`; no additional GitHub App or personal access token
+is needed. Bot-created PR checks may require **Approve workflows to run**.
 See GitHub's [workflow trigger rules](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
 
 ## Cloudflare setup
 
-1. Create an API token using the **Edit Cloudflare Workers** template.
-   Scope it to the account that will host the site.
-2. Copy the token into the GitHub Actions secret `CLOUDFLARE_API_TOKEN`.
-   Copy the target account ID into the GitHub Actions secret `CLOUDFLARE_ACCOUNT_ID`.
-3. Ensure `juliusmoehring.dev` is an active zone in the same Cloudflare account.
-4. Deploy the site. The custom domain `juliusmoehring.dev` is declared in `wrangler.jsonc`, so Wrangler configures it automatically during deployment.
-   Cloudflare creates the DNS record and provisions the TLS certificate.
-   An existing CNAME on that hostname must be resolved before adding the custom domain.
+1. Create an API token with the **Edit Cloudflare Workers** template, scoped to
+   the hosting account. Store it as `CLOUDFLARE_API_TOKEN` and that account's ID
+   as `CLOUDFLARE_ACCOUNT_ID` in GitHub Actions repository secrets.
+2. Ensure `juliusmoehring.dev` is an active zone in that same Cloudflare account.
+3. Release the site. `wrangler.jsonc` declares the custom domain, so Wrangler
+   configures it during deployment. Cloudflare creates DNS and provisions HTTPS.
+   Resolve an existing conflicting CNAME before deployment.
 
-GitHub Actions runs Wrangler to create or update the `juliusmoehring-dev` Worker and upload the built `dist` directory.
-No Cloudflare Git integration or Pages project is needed.
-The Worker also has a `workers.dev` URL enabled.
-
-See Cloudflare's [GitHub Actions setup](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/) and [custom domain instructions](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
+Actions uploads the built `dist` directory to the `juliusmoehring-dev` Worker.
+No Cloudflare Git integration or Pages project is needed. Its `workers.dev` URL
+also remains enabled. See Cloudflare's [GitHub Actions setup](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/)
+and [custom domain instructions](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
 
 ## First release
 
-Keep the existing files and commit history on `main`.
-You do not need to empty the branch or move the initial project to another branch.
+Install these workflows on both long-lived branches before using **Prepare release**.
+For the bootstrap PR into `main`, use a branch named `release/0.0.1`, matching the
+current `package.json`. Once merged and validated, it creates `v0.0.1` and deploys.
+Then merge `main` back into `develop`. Subsequent releases are prepared automatically
+with **Prepare release** after feature PRs merge into `develop`.
+If tags or releases already exist, reconcile that history before bootstrapping;
+never move or replace published tags.
 
-After completing the GitHub and Cloudflare setup:
+## Deployment and retries
 
-1. Create a short-lived branch from the current `main` for the next site change.
-2. Open a pull request with a release-producing title, such as `feat: add portfolio content` or `fix: repair navigation links`.
-   Squash merge it after the required checks pass.
-3. The **Deploy to Cloudflare** workflow validates and deploys the merged site.
-   Wrangler configures the custom domain during this deployment.
-4. Wait for Release Please to open its release pull request for `0.0.1`.
-   Approve its workflow runs if requested, then review and squash merge it after the checks pass.
-   Keep its generated title and description.
-5. Merging the release PR triggers another deployment with the package version from that commit.
-   Release Please also publishes the tag and GitHub Release.
+Every push to `main` runs **Release and deploy**. It validates the exact pushed
+commit, creates the tag and GitHub Release for its package version, and only then
+calls the reusable **Deploy to Cloudflare** workflow with the same commit SHA.
+Successive release runs are queued, rather than canceling earlier pending runs.
 
-The initial `chore: initial commit` and ordinary `docs:` or `chore:` changes do not start a release.
-If a release-producing commit is already on `main` but its Release Please run failed before setup was complete, rerun that failed workflow after enabling the required Actions permissions.
+Neither feature merges into `develop` nor opening release PRs deploys the site.
+Tag and release events do not trigger another workflow; publication and deployment
+run together, so they work with `GITHUB_TOKEN`.
+The deployed HTML version metadata comes directly from `package.json` at build time.
 
-## Deployment
-
-Every push to `main` starts the **Deploy to Cloudflare** workflow.
-It runs lint, type checks, tests, and a deployment dry run before deploying.
-Pull requests run checks without deploying.
-GitHub Releases and tag pushes do not trigger deployments.
-
-Release Please updates `package.json` through release PRs; merging one deploys the new version.
-The HTML `<meta name="version">` reads directly from `package.json` at build time, including local builds.
-Until the next release PR is merged, ordinary site changes keep the current package version.
-No version environment variable is needed.
-
-To restore a previous deployment, rerun its successful deployment workflow.
+If a job fails, use **Re-run failed jobs** on that release run. An existing tag
+is accepted only when it points to the same commit; a published release is reused.
+To redeploy an earlier release, rerun its deployment job.
