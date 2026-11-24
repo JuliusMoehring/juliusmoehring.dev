@@ -16,7 +16,7 @@ test("built homepage includes accessible document metadata and content", async (
 		.replace(/<[^>]*>/g, " ")
 		.replace(/\s+/g, " ")
 		.trim();
-	expect(headline).toBe("Less artificial. More useful.");
+	expect(headline).toBe("Built for people. Powered by AI.");
 });
 
 test("homepage local assets exist in the deployment output", async () => {
